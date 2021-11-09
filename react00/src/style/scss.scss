@@ -1,0 +1,24 @@
+.header-wrap {
+  .header-item:hover {
+    color: orange;
+    position: relative;
+    background: rgba(0,0,0,0.2);
+    & > .header-list {
+      display: block;
+    }
+  }
+  .header-list {
+    color: #fff;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 50px;
+  
+    .header-list-item:hover {
+      color: orange;
+    }
+  }
+}
+

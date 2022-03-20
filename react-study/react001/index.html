@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<script src="../build/react.development.js"></script>
+	<script src="../build/react-dom.development.js"></script>
+	<script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+
+		// 组件A
+		class A extends React.Component {
+			constructor(props) {
+				super(props)
+			}
+			render() {
+				return (<div>我是A组件</div>)
+			}
+		}
+		// 组件B
+		class B extends React.Component {
+			constructor(props) {
+				super(props)
+			}
+			render() {
+				return (<div>我是B组件</div>)
+			}
+		}
+		// 组件C
+		class C extends React.Component {
+			constructor(props) {
+				super(props)
+			}
+			render() {
+				return (<div>我是C组件</div>)
+			}
+		}
+
+		// 根组件
+		class APP extends React.Component {
+			constructor(props) {
+				super(props)
+				this.state = {
+					component: null
+				}
+			}
+			componentDidMount() {
+				history.pushState = this.registState(history.pushState);
+			}
+			registState(pushState) {
+				return () => {
+					console.log('arguments',arguments)
+					let path = arguments[2];
+					this.changeComponent(path)
+					pushState.apply(this,arguments)
+				}
+			}
+			changeComponent(path) {
+				switch(path) {
+					case "A": 
+						this.setState({component:path})
+						break;
+					case "B": 
+						this.setState({component:path})
+						break;
+					default: this.setState({component:path});
+				}
+			}
+			handleBtn() {
+				console.log(11)
+				history.pushState('#','#','A')
+			}
+			render() {
+				let Child = this.state.component;
+				return (
+					<div>
+						<div onClick={this.handleBtn}>我是按钮</div>
+						<Child/>
+					</div>
+				)
+			}
+		}
+
+		ReactDOM.render(
+			<APP/>,
+			document.getElementById('example')
+		);
+	</script>
+</body>
+
+</html>

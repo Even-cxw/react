@@ -49,44 +49,28 @@
 					component: A
 				}
 			}
-			componentDidMount() {
-				history.pushState = this.registState(history.pushState);
-			}
-			registState(pushState) {
-				let _this = this;
-				return function() {
-					console.log('arguments', arguments)
-					let path = arguments[2];
-					_this.changeComponent(path)
-					pushState.apply(this, arguments)
-				}
-			}
-			changeComponent(path) {
-				switch (path) {
-					case "A":
-						this.setState({ component: eval(path) })
-						break;
-					case "B":
-						this.setState({ component: eval(path) })
-						break;
-					default: this.setState({ component: eval(path) });
-				}
-			}
-			handleBtn(val) {
-				console.log(11)
-				history.pushState('#', '#', val)
-			}
+			componentDidMount() {}
 			render() {
-				let Child = this.state.component;
 				return (
 					<div>
-						<div onClick={() => {this.handleBtn("B")}}>切換到B組件</div>
-						<div onClick={() => {this.handleBtn("C")}}>切換到C組件</div>
-						<Child/>
+						我是App组件
 					</div>
 				)
 			}
 		}
+
+
+		// class Router extends React.component {
+		// 	render() {
+		// 		return (
+		// 			<Router>
+		// 				<Route path="/" component={App}></Route>	
+		// 			</Router>
+		// 		)
+		// 	}
+		// }
+
+
 
 		ReactDOM.render(
 			<APP />,

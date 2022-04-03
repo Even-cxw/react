@@ -1,0 +1,14 @@
+{
+  "name": "react-study",
+  "version": "1.0.0",
+  "description": "react001\r   -index.html：不使用react-router实现组件切换",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-router": "^6.2.2"
+  }
+}

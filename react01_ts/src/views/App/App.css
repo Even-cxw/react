@@ -2989,3 +2989,23 @@ mjx-container[display="true"] + br {
     padding: 10px 12px;
   }
 }
+
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.left {
+  width: 15vw;
+  height: 100vh;
+  padding-left: 20px;
+  background: rgb(204, 222, 230);
+  display: flex;
+  flex-direction: column;
+}
+.right {
+  width: 80vw;
+  height: 100vh;
+}

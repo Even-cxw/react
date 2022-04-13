@@ -24,7 +24,7 @@ const App:React.FC<any> =  () => {
         <Link to="/useRef">useRef实践</Link>
         <Link to="/reactMemo">ReactMemo实践</Link>
         <Link to="/useContext">UseContext实践</Link>
-        <Link to="/ReactRouterDom?name='Even'&age=12">ReactRouterDom实践</Link>
+        <Link to={`/ReactRouterDom/${11111}?name='Even'`}>ReactRouterDom实践</Link>
         <Link to="/UseEffect">UseEffect</Link>
 
       </div>
@@ -34,7 +34,7 @@ const App:React.FC<any> =  () => {
           <Route path="/useRef" component={UseRef} />
           <Route path="/reactMemo" component={ReactMemo} />
           <Route path="/useContext" component={UseContext} />
-          <Route path="/ReactRouterDom" component={ReactRouterDom} />
+          <Route path="/ReactRouterDom/:slug" component={ReactRouterDom} />
           <Route path="/UseEffect" component={UseEffect} />
 
         </Switch>

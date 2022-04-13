@@ -1,10 +1,14 @@
 
 import React,{} from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams, useRouteMatch  } from 'react-router-dom';
 
 const ReactRouterDom:React.FC = () => {
     let history = useHistory();
     let location = useLocation();
+    let params = useParams();
+    let match = useRouteMatch();
+    console.log('match',match);
+    console.log('params',params);
     console.log('location',location);
     return (<div>
         React-router-dom

@@ -4,12 +4,6 @@ function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
 module.exports = {
-	webpack: {
-    alias: {
-      '@': resolve('src'),
-      'public': resolve('public')
-    },
-	},
 	//按需引入
 	babel: {
 		plugins: [
@@ -40,5 +34,11 @@ module.exports = {
 				}
 			}
 		}
-	]
+	],
+	webapck: {
+		alias: {
+			'@': resolve('src'),
+			'public': resolve('public')
+		},
+	}
 }

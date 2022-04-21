@@ -32,3 +32,6 @@ export default React.memo(MyComponent,function(pre:any,next:any):boolean {
 
 
 - useHistory
+
+
+- useMemo 监听组件变化

@@ -106,11 +106,30 @@ yarn add react-error-boundary -S
 ```
 
 ```js
+// FallbackComponent => 错误组件样式
+// onError => 方法输出err日志
 <ErrorBoundary FallbackComponent={FallbackComponent} onError={onError}>
 </ErrorBoundary>
 ```
 
 ## 样式组件styled-components
 ```js
-yarn add styled-components @types/styled-components -D
+ yarn add styled-components @types/styled-components -D
+```
+
+```js
+import styled, { DefaultTheme, ThemeProvider, StyleSheetManager } from 'styled-components';
+const FallbackComponentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - ${HEADER_HEIGHT}px);
+`;
+```
+
+## react路由
+- 
+```js
+yarn add react-router-dom -S
+yarn add @types/react-router-dom -D
 ```

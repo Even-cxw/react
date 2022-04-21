@@ -1,6 +1,6 @@
 import React,{useState,useMemo} from 'react';
 
-// 优化 - 
+// 优化 - 监听深层次数据结构
 const UseMemo:React.FC = () => {
 	let [info, setInfo] = useState<{name:string,age:number}>({name:'Even',age:12})
 

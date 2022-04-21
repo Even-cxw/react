@@ -2,13 +2,13 @@ import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter,Link, Route,Switch } from 'react-router-dom';
 import Alert from '../Alert/Alert'
-import UseMemo from '../UseMemo/index'
+import UseMemo from '../UseMemo/index02'
 import UseRef from '../UseRef'
 import ReactMemo from '../ReactMemo'
 import UseContext from '../UseContext'
 import ReactRouterDom from '../ReactRouterDom'
 import UseEffect from '../UseEffect'
-
+import CreateContext from '../CreateContext'
 
 const App:React.FC<any> =  () => {
   const [pathname, setPathname] = useState<string>(window.location.pathname);
@@ -25,8 +25,8 @@ const App:React.FC<any> =  () => {
         <Link to="/reactMemo">ReactMemo实践</Link>
         <Link to="/useContext">UseContext实践</Link>
         <Link to={`/ReactRouterDom/${11111}?name='Even'`}>ReactRouterDom实践</Link>
-        <Link to="/UseEffect">UseEffect</Link>
-
+        <Link to="/UseEffect">UseEffect实践</Link>
+        <Link to="/CreateContext">CreateContext实践</Link>
       </div>
       <div className='right'>
         <Switch>
@@ -36,11 +36,10 @@ const App:React.FC<any> =  () => {
           <Route path="/useContext" component={UseContext} />
           <Route path="/ReactRouterDom/:slug" component={ReactRouterDom} />
           <Route path="/UseEffect" component={UseEffect} />
-
+          <Route path="/CreateContext" component={CreateContext} />
         </Switch>
       </div>
     </div>
-
     </BrowserRouter>
   );
 }

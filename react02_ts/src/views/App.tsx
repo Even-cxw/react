@@ -62,8 +62,8 @@ const App:FC = (props) => {
         {/**类似vue-bus组件，注入数据状态 */}
         <AlertContext.Provider value={AlertContextState}>
           {/**antd全局组件设置 eg:loading位置等 */}
-          <ConfigProvider getPopupContainer={() => alertConfigProvider.current || document.body}>
-            <div ref={alertConfigProvider}>
+          <ConfigProvider  getPopupContainer={() => alertConfigProvider.current || document.body}>
+            <div style={{height:'100%',width:'100%'}} ref={alertConfigProvider}>
               {/**react类似promise当接口调用时显示loading */}
               <Suspense fallback={<Spin />}>{renderAlertRoutes}</Suspense>
             </div>

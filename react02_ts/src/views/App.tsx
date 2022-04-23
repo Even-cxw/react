@@ -42,8 +42,8 @@ const App:FC = (props) => {
     return(
       <Routes>
         <Route path="/" element={<Nav/>}>
-          <Route index element={<AlertMonitorCreateAndEdit/>}></Route>
-          {/* <Route path="/monitor/cae" element={<AlertMonitorCreateAndEdit/>}></Route> */}
+          {/* <Route index element={<AlertMonitorCreateAndEdit/>}></Route> */}
+          <Route path="/monitor/cae" element={<AlertMonitorCreateAndEdit/>}></Route>
           <Route path="*" element={<NotFound/>}></Route>
         </Route>
         <Route path="/404" element={<NotFound/>}></Route>

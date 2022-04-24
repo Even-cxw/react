@@ -9,7 +9,9 @@ import UseContext from '../UseContext'
 import ReactRouterDom from '../ReactRouterDom'
 import UseEffect from '../UseEffect'
 import CreateContext from '../CreateContext'
+import StyledComponents from '../StyledComponents'
 
+// StyledComponents
 const App:React.FC<any> =  () => {
   const [pathname, setPathname] = useState<string>(window.location.pathname);
   const activeBaseName = useMemo<string>(() => pathname.split('/')[1], [pathname]);
@@ -27,6 +29,8 @@ const App:React.FC<any> =  () => {
         <Link to={`/ReactRouterDom/${11111}?name='Even'`}>ReactRouterDom实践</Link>
         <Link to="/UseEffect">UseEffect实践</Link>
         <Link to="/CreateContext">CreateContext实践</Link>
+        <Link to="/StyledComponents">StyledComponents实践</Link>
+
       </div>
       <div className='right'>
         <Switch>
@@ -37,6 +41,8 @@ const App:React.FC<any> =  () => {
           <Route path="/ReactRouterDom/:slug" component={ReactRouterDom} />
           <Route path="/UseEffect" component={UseEffect} />
           <Route path="/CreateContext" component={CreateContext} />
+          <Route path="/StyledComponents" component={StyledComponents} />
+          
         </Switch>
       </div>
     </div>

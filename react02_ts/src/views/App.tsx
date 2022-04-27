@@ -1,18 +1,19 @@
-import React, { FC,useMemo,Suspense,useRef,useState } from 'react';
+import React, { FC, useMemo, Suspense, useRef, useState, createContext } from 'react';
 import './App.less';
-import { Result,ConfigProvider,Spin } from 'antd';
+import { Result, ConfigProvider, Spin } from 'antd';
 import { ErrorBoundary } from 'react-error-boundary';
-import styled from 'styled-components';
+import styled, { DefaultTheme, ThemeProvider } from 'styled-components';
 import { HEADER_HEIGHT } from '../config/ui';
-import { Routes, Route,BrowserRouter} from 'react-router-dom';
-import AlertContext, { AlertContextState } from './utils/context';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import StoreContext, { store } from './utils/context';
 import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
 import Nav from './components/Nav';
-import NotFound from './components/NotFound';
-import storage, {IStorage} from './store';
+import NotFound from './components/NotFound/notFound';
+import Login from './components/Login/login'
+import { IStorage } from './store';
 import useStore from './store/shard';
 
-function onError(err:Error) {
+function onError(err: Error) {
   console.error(err)
 }
 
@@ -31,51 +32,52 @@ const FallbackComponent = () => {
   );
 };
 
-
-
-const App:FC = (props) => {
+const App: FC = (props) => {
   // loading要挂在的位置
   const alertConfigProvider = useRef<HTMLDivElement>(null);
   const [pathname, setPathname] = useState<string>(window.location.pathname);
-  console.log('pathname',pathname);
-  // debugger;
+  console.log('pathname', pathname);
+  let [theme] = useStore<IStorage>(store, 'theme');
 
   const renderAlertRoutes = useMemo(() => {
-    return(
+    return (
       <Routes>
-        <Route path="/" element={<Nav/>}>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Nav />}>
           {/* <Route index element={<AlertMonitorCreateAndEdit/>}></Route> */}
-          <Route path="/monitor/cae" element={<AlertMonitorCreateAndEdit/>}></Route>
-          <Route path="*" element={<NotFound/>}></Route>
+          <Route path="/monitor/cae" element={<AlertMonitorCreateAndEdit />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
-        <Route path="/404" element={<NotFound/>}></Route>
+        <Route path="/404" element={<NotFound />}></Route>
       </Routes>
     )
-  },[])
+  }, [])
 
 
   // 路由组件
   const renderBrowser = useMemo(() => {
-    return(
-    /**浏览器模式 */
-    <BrowserRouter basename={'/'}>
-      {/**容错组件 */}
-      <ErrorBoundary FallbackComponent={FallbackComponent} onError={onError}>
-        {/**类似vue-bus组件，注入数据状态 */}
-        <AlertContext.Provider value={AlertContextState}>
-          {/**antd全局组件设置 eg:loading位置等 */}
-          <ConfigProvider  getPopupContainer={() => alertConfigProvider.current || document.body}>
-            <div style={{height:'100%',width:'100%'}} ref={alertConfigProvider}>
-              {/**react类似promise当接口调用时显示loading */}
-              <Suspense fallback={<Spin />}>{renderAlertRoutes}</Suspense>
-              {/* <Suspense fallback={<Spin />}>{<NotFound/>}</Suspense> */}
-            </div>
-          </ConfigProvider>
-        </AlertContext.Provider>
-      </ErrorBoundary>
-    </BrowserRouter>
+    return (
+      /**浏览器模式 */
+      <BrowserRouter basename={'/'}>
+        {/**容错组件 */}
+        <ErrorBoundary FallbackComponent={FallbackComponent} onError={onError}>
+          {/**类似vue-bus组件，注入数据状态 */}
+          <StoreContext.Provider value={store}>
+            <ThemeProvider theme={theme as DefaultTheme}>
+              {/**antd全局组件设置 eg:loading位置等 */}
+              <ConfigProvider getPopupContainer={() => alertConfigProvider.current || document.body}>
+                <div style={{ height: '100%', width: '100%' }} ref={alertConfigProvider}>
+                  {/**react类似promise当接口调用时显示loading */}
+                  <Suspense fallback={<Spin />}>{renderAlertRoutes}</Suspense>
+                  {/* {<NotFound></NotFound>} */}
+                </div>
+              </ConfigProvider>
+            </ThemeProvider>
+          </StoreContext.Provider>
+        </ErrorBoundary>
+      </BrowserRouter>
     )
-  },[])
+  }, [])
 
 
 

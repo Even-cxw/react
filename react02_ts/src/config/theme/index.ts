@@ -1,4 +1,4 @@
-export interface Theme {
+export interface ITheme {
   /* 颜色 */
   'primary-color': string, // 全局主色
   'success-color': string, // 成功色
@@ -48,6 +48,6 @@ export interface Theme {
   'code-family': string, // 代码字体
 }
 
-const theme: Theme = require('./theme.js')
+const theme: ITheme = require('./theme.js')
 
 export default theme

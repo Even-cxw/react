@@ -1,4 +1,4 @@
-const CracoLessPlugin = require("craco-less");
+// const CracoLessPlugin = require("craco-less");
 const path = require('path')
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
@@ -21,19 +21,19 @@ module.exports = {
 	},
 	//自定义主题
 	plugins: [
-		{
-			plugin: CracoLessPlugin,
-			options: {
-				// 此处根据 less-loader 版本的不同会有不同的配置，详见 less-loader 官方文档
-				lessLoaderOptions: {
-					lessOptions: {
-						//颜色即为自定义颜色
-						// modifyVars: { '@primary-color': 'red' },
-						javascriptEnabled: true
-					}
-				}
-			}
-		}
+		// {
+		// 	plugin: CracoLessPlugin,
+		// 	options: {
+		// 		// 此处根据 less-loader 版本的不同会有不同的配置，详见 less-loader 官方文档
+		// 		lessLoaderOptions: {
+		// 			lessOptions: {
+		// 				//颜色即为自定义颜色
+		// 				// modifyVars: { '@primary-color': 'red' },
+		// 				javascriptEnabled: true
+		// 			}
+		// 		}
+		// 	}
+		// }
 	],
 	webapck: {
 		alias: {

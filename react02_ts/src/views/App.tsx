@@ -9,6 +9,8 @@ import AlertContext, { AlertContextState } from './utils/context';
 import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
 import Nav from './components/Nav';
 import NotFound from './components/NotFound';
+import storage, {IStorage} from './store';
+import useStore from './store/shard';
 
 function onError(err:Error) {
   console.error(err)
@@ -66,6 +68,7 @@ const App:FC = (props) => {
             <div style={{height:'100%',width:'100%'}} ref={alertConfigProvider}>
               {/**react类似promise当接口调用时显示loading */}
               <Suspense fallback={<Spin />}>{renderAlertRoutes}</Suspense>
+              {/* <Suspense fallback={<Spin />}>{<NotFound/>}</Suspense> */}
             </div>
           </ConfigProvider>
         </AlertContext.Provider>

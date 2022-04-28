@@ -1,22 +1,8 @@
 import { useState, useCallback, useEffect } from 'react'
-import IStorage from './storage'
+import {Istore} from './index'
 
-export interface UserInfo {
-  id: number
-  username?: string
-  nickname: string
-  token: string
-  email?: string
-  description?: string
-  disabled?: number
-}
-
-
-const useStore  = <T>(store: IStorage, key: string) => {
+export const useStore  = <T>(store: Istore, key: string) => {
   const [state, setValue] = useState(store.get<T>(key))
-//   const [state, setValue] = useState({name:"Even"})
-
-
   const changeHandler = useCallback(v => {
     setValue(v)
   }, [])
@@ -36,5 +22,3 @@ const useStore  = <T>(store: IStorage, key: string) => {
 
   return [state, setState] as [typeof state, typeof setState]
 }
-
-export default useStore;

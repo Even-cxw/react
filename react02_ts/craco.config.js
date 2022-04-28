@@ -1,8 +1,9 @@
 // const CracoLessPlugin = require("craco-less");
 const path = require('path')
-function resolve(relatedPath) {
-  return path.join(__dirname, relatedPath)
-}
+// function resolve(relatedPath) {
+//   return path.join(__dirname, relatedPath)
+// }
+const resolve = (dir) => path.join(__dirname, '.', dir);
 module.exports = {
 	//按需引入
 	babel: {
@@ -37,7 +38,7 @@ module.exports = {
 	],
 	webapck: {
 		alias: {
-			'@': resolve('src'),
+			"@": resolve("src"),
 			'public': resolve('public')
 		},
 	}

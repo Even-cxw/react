@@ -5,13 +5,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 import styled, { DefaultTheme, ThemeProvider } from 'styled-components';
 import { HEADER_HEIGHT } from '../config/ui';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import StoreContext, { store } from './utils/context';
+import { StoreContext } from './utils/context';
 import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
 import Nav from './components/Nav';
 import NotFound from './components/NotFound/notFound';
 import Login from './components/Login/login'
-import { IStorage } from './store';
-import useStore from './store/shard';
+import {useStore,Istore,store} from './store';
 
 function onError(err: Error) {
   console.error(err)
@@ -37,7 +36,7 @@ const App: FC = (props) => {
   const alertConfigProvider = useRef<HTMLDivElement>(null);
   const [pathname, setPathname] = useState<string>(window.location.pathname);
   console.log('pathname', pathname);
-  let [theme] = useStore<IStorage>(store, 'theme');
+  let [theme] = useStore<Istore>(store, 'theme');
 
   const renderAlertRoutes = useMemo(() => {
     return (

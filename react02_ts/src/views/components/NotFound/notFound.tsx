@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { Result } from 'antd'
-import StoreContext from '../../utils/context'
+import {StoreContext} from '../../utils/context'
 import NotFoundImage from '../../../assets/images/404.png'
 import styled, { DefaultTheme, ThemeProvider } from 'styled-components';
 

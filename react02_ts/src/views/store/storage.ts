@@ -12,7 +12,7 @@ const emptyWarning = (key: string) => console.warn(`Storage @bizseer-x-portal: n
 
 const localStorageKeyPrefix = 'bizseer_x_portal_'
 
-const fromLocalStorage = (key: string) => {
+export const fromLocalStorage = (key: string) => {
   const str = window.localStorage.getItem(localStorageKeyPrefix + key)
   try {
     return JSON.parse(str as string)
@@ -21,13 +21,13 @@ const fromLocalStorage = (key: string) => {
   }
 }
 
-const toLocalStorage = (key: string, value: any) => {
+export const toLocalStorage = (key: string, value: any) => {
   const str = JSON.stringify(value)
   window.localStorage.setItem(localStorageKeyPrefix + key, str)
 }
 
 
-class Storage {
+export class Storage {
   state: State = {}
   listeners: Listeners = {}
   syncWithLocalStorage: SyncWithLocalStorage = {}
@@ -107,4 +107,3 @@ class Storage {
 
 }
 
-export default Storage

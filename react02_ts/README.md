@@ -33,3 +33,20 @@ module.exports = {
   // ...
 };
 ```
+
+
+## 项目开发规范
+
+### 入口文件
+1. 每个文件夹下面有`index.ts入口文件`，整合所有`方法` 、`接口`对外暴露
+
+2. 定义接口:数据前面加大写I， eg:如下
+```ts
+interface Idata {
+  key:string
+}
+let data:Idata ={
+  key:'asdf123'
+}
+
+```

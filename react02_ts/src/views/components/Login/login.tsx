@@ -1,8 +1,7 @@
 import React, { useEffect,useContext } from 'react';
-import store, { IUserInfo } from '../../store';
-import useStore from '../../store/shard'
+import { useStore } from '../../store';
 import { Form, Input, Button, Checkbox } from 'antd';
-import StoreContext from '../../utils/context';
+import {StoreContext} from '../../utils/context';
 const Login: React.FC = () => {
 	let {theme} = useContext(StoreContext).state
 	console.log('theme',theme)

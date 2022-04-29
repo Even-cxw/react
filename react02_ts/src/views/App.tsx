@@ -10,7 +10,7 @@ import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
 import Nav from './components/Nav';
 import NotFound from './components/NotFound/notFound';
 import Login from './components/Login/login'
-import {useStore,Istore,store} from './store';
+import {useStore,store, Itheme} from './store';
 
 function onError(err: Error) {
   console.error(err)
@@ -36,7 +36,7 @@ const App: FC = (props) => {
   const alertConfigProvider = useRef<HTMLDivElement>(null);
   const [pathname, setPathname] = useState<string>(window.location.pathname);
   console.log('pathname', pathname);
-  let [theme] = useStore<Istore>(store, 'theme');
+  let [theme] = useStore<Itheme>(store, 'theme');
 
   const renderAlertRoutes = useMemo(() => {
     return (

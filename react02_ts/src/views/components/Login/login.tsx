@@ -1,14 +1,23 @@
-import React, { useEffect,useContext } from 'react';
+import React, { useEffect,useContext, useCallback } from 'react';
 import { useStore } from '../../store';
 import { Form, Input, Button, Checkbox } from 'antd';
 import {StoreContext} from '../../utils/context';
+import {api} from '../../../services/api'
+
+api.getInfo().then(res => {
+	console.log(res)
+})
+
 const Login: React.FC = () => {
 	let {theme} = useContext(StoreContext).state
-	console.log('theme',theme)
-	const onFinish = (values) => {
+	const onFinish = useCallback((values) => {
 		console.log('Success:', values);
 		let {password,username} = values;
-	};
+		api.getInfo({password,username}).then(res => {
+			console.log(res)
+			alert('登录成功！')
+		})
+	},[])
 
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);

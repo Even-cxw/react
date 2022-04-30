@@ -1,7 +1,10 @@
 
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Canceler }  from 'axios';
 
 let responseInterceptorsId:number = -1;
+const DEFAULT_ERROR_MESSAGE = '请求失败，请稍后再试'
+export const SUCCESS = 0
+export const UNAUTHORIZED = 401
 
 // 容错状态码
 const errorStatus = new Map([
@@ -33,8 +36,9 @@ const requestInterceptors = config => {
   config.headers['Content-Type'] = 'application/json';
   return config;
 }
+
 // 请求容错处理
-const requestErrorInterceptors = error => {
+const requestErrorInterceptors:(error:any)=>never = error => {
   throw new Error(error)
 }
 
@@ -47,12 +51,12 @@ const responseInterceptors = response => {
 }
 
 // 响应容错处理
-const responeseErrorInterceptors = error => {
-  return Promise.resolve(error)
+const responeseErrorInterceptors:(error:any)=>never = error => {
+  throw new Error(error)
 }
 
 // 根据originResponse判断是否需要使用拦截器
-const useResponseInterceptors = options => {
+const handleResponseInterceptors = options => {
   options = options?options:{};
   if (options.originResponse) {
     responseInterceptorsId !== -1 && instance.interceptors.response.eject(responseInterceptorsId)
@@ -64,16 +68,39 @@ const useResponseInterceptors = options => {
   }
 }
 
-export const $httpGet = ({data,url}) => {
-  useResponseInterceptors(data)
-  return instance.get(url,{params:{...data}}).catch(err => {
-    throw new Error(err)
-  })
+
+// 请求参数等于401，强制退出
+export const authorizationFailedHandler = (error: any): any => {
+  const status = error?.response?.status
+  if (status !== UNAUTHORIZED) {
+    throw error
+  }
+  // 来源于portal
+  // (window as any).logout()
 }
 
-export const $httpPost = ({data,url}) => {
-  useResponseInterceptors(data)
-  return instance.get(url,data).catch(err => {
-    throw new Error(err)
-  })
+export function httpErrorStatusMapping(error: any): Error {
+  const status = error.response?.status
+  const errorMsg = errorStatus.get(status as number) ?? DEFAULT_ERROR_MESSAGE
+
+  throw new Error(errorMsg)
+}
+
+interface axiosData {
+  url:string,
+  data?:{any}
+}
+
+export const get = ({data={},url}) => {
+  handleResponseInterceptors(data)
+  return instance.get(url,{params:{...data}})
+  .catch(authorizationFailedHandler)
+  .catch(httpErrorStatusMapping)
+}
+
+export const post = ({data={},url}) => {
+  handleResponseInterceptors(data)
+  return instance.get(url,data)
+  .catch(authorizationFailedHandler)
+  .catch(httpErrorStatusMapping)
 }

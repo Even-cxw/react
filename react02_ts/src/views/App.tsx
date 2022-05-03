@@ -7,9 +7,13 @@ import { HEADER_HEIGHT } from '../config/ui';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { StoreContext } from './utils/context';
 import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
+import Table from './components/Table/Table';
+import EditTable from './components/Table/EditTable';
+import Filter from './components/Table/Filter'
 import Nav from './components/Nav';
 import NotFound from './components/NotFound/notFound';
 import Login from './components/Login/login'
+import Pagination from './components/Pagination/Pagination'
 import {useStore,store, Itheme} from './store';
 
 function onError(err: Error) {
@@ -37,7 +41,6 @@ const App: FC = (props) => {
   const [pathname, setPathname] = useState<string>(window.location.pathname);
   console.log('pathname', pathname);
   let [theme] = useStore<Itheme>(store, 'theme');
-
   const renderAlertRoutes = useMemo(() => {
     return (
       <Routes>
@@ -45,6 +48,10 @@ const App: FC = (props) => {
         <Route path="/" element={<Nav />}>
           {/* <Route index element={<AlertMonitorCreateAndEdit/>}></Route> */}
           <Route path="/monitor/cae" element={<AlertMonitorCreateAndEdit />}></Route>
+          <Route path="/table" element={<Table />}></Route>
+          <Route path="/Pagination" element={<Pagination />}></Route>
+          <Route path="/editTable" element={<EditTable />}></Route>
+          <Route path="/filter" element={<Filter />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="/404" element={<NotFound />}></Route>
@@ -65,8 +72,8 @@ const App: FC = (props) => {
             <ThemeProvider theme={theme as DefaultTheme}>
               {/**antd全局组件设置 eg:loading位置等 */}
               <ConfigProvider getPopupContainer={() => alertConfigProvider.current || document.body}>
-                <div style={{ height: '100%', width: '100%' }} ref={alertConfigProvider}>
-                  {/**react类似promise当接口调用时显示loading */}
+                <div ref={alertConfigProvider}>
+                  {/**组件懒加载时 提供loading */}
                   <Suspense fallback={<Spin />}>{renderAlertRoutes}</Suspense>
                   {/* {<NotFound></NotFound>} */}
                 </div>
@@ -77,7 +84,6 @@ const App: FC = (props) => {
       </BrowserRouter>
     )
   }, [])
-
 
 
   return (

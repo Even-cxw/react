@@ -47,7 +47,7 @@ instance.interceptors.request.use(requestInterceptors,requestErrorInterceptors)
 
 // 响应拦截
 const responseInterceptors = response => {
-  return Promise.resolve(response)
+  return Promise.resolve(response.data)
 }
 
 // 响应容错处理

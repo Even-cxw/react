@@ -14,7 +14,7 @@ const NotFound: React.FC = (props) => {
   console.log('state',state);
   return (
     <>
-    <TestTyle>niaho</TestTyle>
+    {/* <TestTyle style={{position:'absolute'}}>niaho</TestTyle> */}
     <Result title="404" subTitle="您要访问的页面, 它去了遥远的星球, 暂时访问不了" icon={<img src={NotFoundImage} alt="404" />} />
     </>
   )

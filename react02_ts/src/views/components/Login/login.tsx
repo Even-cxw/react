@@ -1,21 +1,24 @@
-import React, { useEffect,useContext, useCallback } from 'react';
+import React, { useEffect,useContext, useCallback, useState } from 'react';
 import { useStore } from '../../store';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Spin } from 'antd';
 import {StoreContext} from '../../utils/context';
 import {api} from '../../../services/api'
+import { useNavigate } from 'react-router-dom';
 
-api.getInfo().then(res => {
-	console.log(res)
-})
 
 const Login: React.FC = () => {
 	let {theme} = useContext(StoreContext).state
+  let navigate = useNavigate();
+	let [loading,setLoading] = useState<boolean>(false)
+	// 提交按钮
 	const onFinish = useCallback((values) => {
 		console.log('Success:', values);
+		setLoading(true)
 		let {password,username} = values;
 		api.getInfo({password,username}).then(res => {
 			console.log(res)
-			alert('登录成功！')
+			setLoading(false)
+			navigate('/')
 		})
 	},[])
 
@@ -25,6 +28,7 @@ const Login: React.FC = () => {
 
 	return (
 		<div className='f-c-c vh_100 vw_100' style={{background:theme['background-color-base']}}>
+			<Spin spinning={loading}>
 			<div className="py_45 px_20 vw_50">
 				<Form name="basic"
 					labelCol={{ span: 4 }}
@@ -58,6 +62,7 @@ const Login: React.FC = () => {
 					</Form.Item>
 				</Form>
 			</div>
+			</Spin>
 		</div>
 	);
 };

@@ -73,7 +73,12 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Option 1', '/monitor/cae', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('table表单', 'subone', <DesktopOutlined />,[
+    getItem('基本表单', '/table'),
+    getItem('可编辑表单', '/editTable'),
+    getItem('分页', '/Pagination'),
+    getItem('测试filter', '/filter'),
+  ]),
   getItem('Option 3', '3', <ContainerOutlined />),
 
   getItem('Navigation One', 'sub1', <MailOutlined />, [
@@ -96,7 +101,7 @@ interface IMenuC {
   handleCollapsed:any
 }
 
-const MenuC: React.FC<IMenuC> = (props) => {
+function useMenuC(props) {
   let {collapsed,setCollapsed} = props.handleCollapsed;
   let navigate = useNavigate();
   const toggleCollapsed = () => {
@@ -121,5 +126,6 @@ const MenuC: React.FC<IMenuC> = (props) => {
       />
     </div>
   );
-
 }
+
+const MenuC = React.memo(useMenuC)

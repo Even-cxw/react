@@ -10,6 +10,7 @@ import AlertMonitorCreateAndEdit from './components/MonitorCreateAndEdit';
 import Table from './components/Table/Table';
 import EditTable from './components/Table/EditTable';
 import Filter from './components/Table/Filter'
+import PackageTable from './components/Table/PackageTable'
 import Nav from './components/Nav';
 import NotFound from './components/NotFound/notFound';
 import Login from './components/Login/login'
@@ -52,6 +53,7 @@ const App: FC = (props) => {
           <Route path="/Pagination" element={<Pagination />}></Route>
           <Route path="/editTable" element={<EditTable />}></Route>
           <Route path="/filter" element={<Filter />}></Route>
+          <Route path="/packageTable" element={<PackageTable />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
         <Route path="/404" element={<NotFound />}></Route>

@@ -106,7 +106,7 @@ const Table01:React.FC = function() {
 					{selectedRowKeys.length ? `Selected ${selectedRowKeys.length} items` : ''}
 				</span>
 			</div>
-			<Table rowSelection={rowSelection} columns={columns} dataSource={tableList} pagination={pagination} loading={loading} />
+			<Table rowKey={record=>record.name} rowSelection={rowSelection} columns={columns} dataSource={tableList} pagination={pagination} loading={loading} />
 		</div>
 	);
 	

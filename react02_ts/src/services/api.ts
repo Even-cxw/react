@@ -11,4 +11,5 @@ let apiConfig = new Map([
 export let api = {
     getInfo(data={}) {return get({url:apiConfig.get('base')+'test',data})},
     getTableList(data={}) {return get({url:apiConfig.get('base')+'table/list',data})},
+    getTableList02(data={}) {return get({url:apiConfig.get('base')+'table/packageList',data})},
 }

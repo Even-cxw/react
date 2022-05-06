@@ -78,6 +78,7 @@ const items: MenuItem[] = [
     getItem('可编辑表单', '/editTable'),
     getItem('分页', '/Pagination'),
     getItem('测试filter', '/filter'),
+    getItem('第一次封装Table', '/packageTable'),
   ]),
   getItem('Option 3', '3', <ContainerOutlined />),
 

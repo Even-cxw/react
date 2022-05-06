@@ -1,4 +1,11 @@
+import { resolve } from 'dns';
 import React,{useCallback, useEffect,useState} from 'react';
+
+function api () {
+	return new Promise(resolve => {
+		setTimeout(() => {resolve(1111)},2000)
+	})
+}
 
 const UseEffect: React.FC = () => {
 	let [info,setInfo] = useState<{name:string,age:number}>({name:'Even',age:12})
@@ -8,6 +15,14 @@ const UseEffect: React.FC = () => {
 	let handleName = useCallback(() => {
 		info.name = 'Levi'
 		setInfo({...info});
+	},[])
+
+	// 如何在useEffect中使用await方法
+	useEffect(() => {
+		(async() => {
+			let a = await api()
+			console.log('a',a)
+		})()
 	},[])
 	return (
 		<div>

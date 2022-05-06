@@ -10,6 +10,7 @@ import ReactRouterDom from '../ReactRouterDom'
 import UseEffect from '../UseEffect'
 import CreateContext from '../CreateContext'
 import StyledComponents from '../StyledComponents'
+import UseRaf from '../../reactUse/UseRaf'
 
 // StyledComponents
 const App:React.FC<any> =  () => {
@@ -30,6 +31,7 @@ const App:React.FC<any> =  () => {
         <Link to="/UseEffect">UseEffect实践</Link>
         <Link to="/CreateContext">CreateContext实践</Link>
         <Link to="/StyledComponents">StyledComponents实践</Link>
+        <Link to="/UseRaf">UseRaf</Link>
 
       </div>
       <div className='right'>
@@ -42,6 +44,7 @@ const App:React.FC<any> =  () => {
           <Route path="/UseEffect" component={UseEffect} />
           <Route path="/CreateContext" component={CreateContext} />
           <Route path="/StyledComponents" component={StyledComponents} />
+          <Route path="/UseRaf" component={UseRaf} />
           
         </Switch>
       </div>

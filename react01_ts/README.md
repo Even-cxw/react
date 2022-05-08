@@ -35,3 +35,6 @@ export default React.memo(MyComponent,function(pre:any,next:any):boolean {
 
 
 - useMemo 监听组件变化
+
+
+- props.children

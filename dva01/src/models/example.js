@@ -3,7 +3,7 @@ export default {
 
   namespace: 'example',
 
-  state: {},
+  state: {name:'Even',age:12},
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -12,7 +12,7 @@ export default {
 
   effects: {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
+      yield put({ type: 'add', payload});
     },
   },
 
@@ -20,6 +20,10 @@ export default {
     save(state, action) {
       return { ...state, ...action.payload };
     },
+    add(state,action) {
+      console.log('reducers',state,action)
+      return { ...state, ...action.payload };
+    }
   },
 
 };

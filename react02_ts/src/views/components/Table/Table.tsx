@@ -16,12 +16,20 @@ const columns = [
 		title: 'Address',
 		dataIndex: 'address',
 		// 替换所有列表内容
-		render:(text,record) => {
-			// 所有内容
-			// console.log('text',text)
-			// 当前对象内容
-			// console.log('record',record)
-			return <div>{text}+++111</div>
+		render:(text,record,index) => {
+			console.log('record', record);
+			// return <div>{text}+++111</div>
+			if (index == 4) {
+				return {
+					children: text,
+					props: {
+						rowSpan: 2,
+					},
+				}
+			} else {
+				return text
+			}
+		
 		}
 	},
 ];
@@ -35,7 +43,7 @@ const columns = [
 const paginationParams = {
 	page: 1, // 当前页数
 	pageSize: 10, // 一页多少条
-	total: 10, // 总多少页
+	total: 10, // 总多少页 
 }
 
 const Table01:React.FC = function() {
